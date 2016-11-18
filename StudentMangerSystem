@@ -1,0 +1,174 @@
+#coding=UTF-8	
+
+students = [{'no':1, 'name':'li', 'age':12},{'no':2, 'name':'zhang', 'age':12},{'no':3, 'name':'wang', 'age':14},{'no':4, 'name':'li', 'age':11}]
+
+def switch(x):
+
+	switch = {
+		1: case1,
+		2: case2,
+		3: case3,
+		4: case4,
+		5: case5,
+		6: case6
+	}
+
+	switch[x]()
+
+
+
+def case1():
+	if len(students) > 0:
+		printFunction(students)
+	else :
+		print "当前系统中无学生信息"
+
+	continueFunction(1)
+
+
+def case2():
+	student_no = raw_input("请输入学生学号")
+	student_name = raw_input("请输入学生姓名")
+	student_age = raw_input("请输入学生年龄")
+
+	student = {'no':student_no,'name':student_name,'age':student_age}
+	students.append(student)
+
+	continueFunction(2)
+
+def case3():
+	print '请输入如何删除学生: 1:根据学号直接删除 2:查询后批量删除'
+	value = int(raw_input())
+	if value == 1:
+
+		selectedStudentNo = int(raw_input('请输入学号: '))
+		search = -1
+		for student in students:
+			if int(student['no']) == selectedStudentNo:
+				students.remove(student)
+				search += 1
+				print '删除成功'
+				break
+		if search == -1:
+			print ('没有学号为%d的学生'%selectedStudentNo)
+
+	elif value == 2: 
+
+		searchStudent = searchFunction()
+
+		print searchStudent
+
+		delet = int(raw_input('请问是否确认删除 1:删除 其他:退出'))
+		if delet == 1:
+
+			for student in searchStudent:
+				students.remove(student)
+				print '删除成功'
+			
+		else:
+			pass
+
+	else:
+		print "非法输入"
+
+	continueFunction(3)
+
+def case4():
+	
+	print '请输入如何修改学生: 1:根据学号修改 2:查询后修改'
+	updateSytle = int(raw_input())
+	if updateSytle == 1:
+		
+		updateNo = int(raw_input('请输入要修改的学生的学号'))
+		update = -1
+		for student in students:
+			if updateNo == int(student['no']):
+				# 修改
+				student_no = raw_input("请输入学生学号")
+				student_name = raw_input("请输入学生姓名")
+				student_age = raw_input("请输入学生年龄")
+
+				updateStudent = {'no':student_no,'name':student_name,'age':student_age}
+				
+				index = students.index(student)
+				students[index] = updateStudent
+				print '修改成功'
+				pass
+		pass
+
+	elif updateSytle == 2:
+		print "尚未开发，请等待..."
+		# searchStudent = searchFunction()
+
+	else:
+		 print '非法输入' 
+
+	continueFunction(4)
+
+def case5():
+	
+	searchFunction()
+	continueFunction(5)
+
+def case6():
+	pass
+
+def searchFunction():
+	
+	selectedStudent = []
+
+	print("请输入要根据哪项来查找学生: 1:学号 2:姓名 3:年龄")
+	select = raw_input()
+	select = int(select)
+	value = raw_input('请输入要查询的值:')
+
+	selectNum = ['no','name','age']
+
+	for student in students:
+		if str(student[selectNum[select - 1]]) == value:
+			selectedStudent.append(student)
+
+	if len(selectedStudent) > 0:
+		printFunction(selectedStudent)
+	else:
+		print '无符合的学生'
+
+	return selectedStudent
+
+def continueFunction(x):
+	print ""
+	value = raw_input("退出请按q，继续本操作请按空格，其他任意键回到主菜单:")
+	if value == 'q':
+		print "退出系统"
+	elif value == ' ':
+		switch(x)
+	else :
+		main()
+
+def printFunction(printStudents):
+	print '-' * 38
+	print '学号'.center(12),'|','姓名'.center(12),'|','年龄'.center(12),'|'
+	for student in printStudents:
+		print '-' * 38
+		print str(student['no']).center(10),'|',str(student['name']).center(10),'|',str(student['age']).center(10),'|'
+	print '-' * 38
+
+def main():
+
+	print "学生管理系统".center(30)
+	print "请输入想要进行的操作"
+	print "1: 查看所有学生信息"
+	print "2: 添加学生信息"
+	print "3: 删除学生信息"
+	print "4: 修改学生信息"
+	print "5: 查询学生信息"
+	print "6: 退出系统"
+
+	insert = raw_input("请输入想要进行的操作：")
+	insert = int(insert)
+
+	switch(insert)
+
+main()
+
+
